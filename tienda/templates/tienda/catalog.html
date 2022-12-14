@@ -1,0 +1,42 @@
+{% extends 'tienda/layouts/main.html' %}
+    
+ {% block content %}
+
+  
+ <div class="py-3 bg-primary">
+    <div class="container">
+        <a class="text-white" href="{% url 'home' %}">Inicio / </a>
+        <a class="text-white" href="{% url 'catalog' %}">Catalogo</a>
+    </div>
+</div>
+
+
+ <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Catalogo</h1>
+            <hr>
+            <div class="row">
+                <!-- for para mostrar los items del catalogo de las categorias ingresadas en category
+                muestra el nombre, y la imagen de la categoria -->
+                {% for item in category %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <a href="{% url 'catalogview' item.slug %}">
+                                <div class="card-body">
+                                    <div class="category-image">
+                                        <img src="{{ item.image.url }}"alt="imagen de la categoria" class="w-100"/>
+                                    </div>
+                                    <h4 class="text-center" > {{item.name}}</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+{% endblock content %} %}
