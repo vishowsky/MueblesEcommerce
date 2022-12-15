@@ -7,10 +7,14 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link " aria-current="page" href="{% url 'home' %}">Inicio</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"  aria-current="page" href="{% url 'home' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'catalog' %}">Catalogo</a>
+            <a class="nav-link {% if request.resolver_match.url_name == 'catalog' %}active{% endif %}" href="{% url 'catalog' %}">Catalogo</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %} " aria-current="page" href="{% url 'cart' %}">Carro</a>
           </li>
 
           {% if request.user.is_authenticated %}

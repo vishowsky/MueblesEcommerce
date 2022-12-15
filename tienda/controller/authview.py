@@ -16,7 +16,7 @@ def register(request):
 
 def loginpage(request):
     if request.user.is_authenticated:
-        messages.warning(request, "ya te encuentras loggeado")
+        messages.warning(request, "Ya te encuentras loggeado")
         return redirect('/')
     else:
         if request.method == 'POST':
