@@ -1,0 +1,33 @@
+{% extends 'tienda/layouts/main.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="">
+                <div class="card mt-3 shadow">
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="text-center">
+                                <h4>Iniciar sesion</h4>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                              <label for="">Usuario</label>
+                              <input type="text" class="form-control my-2" name="username" placeholder="ingrese su usuario">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Contraseña</label>
+                              <input type="password" class="form-control my-2"  name="password" placeholder="ingrese su contraseña">
+                            </div>
+                            <button type="submit" class="btn float-end shadow my-2 btn-success px-4">Iniciar sesion</button>
+                          </form>                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
