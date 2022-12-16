@@ -1,0 +1,106 @@
+
+{% extends 'tienda/layouts/main.html' %}
+    
+{% block content %}
+
+<div class="py-3 bg-primary s">
+   <div class="container">
+       <a class="text-white" href="{% url 'home' %}">Inicio / </a>
+       <a class="text-white" href="{% url 'cart' %}">Pago  </a>
+   </div>
+</div>
+
+<div class="container my-3">
+    <form action="{% url 'placeorder' %}" method="POST">
+        {% csrf_token %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card shadow checkoutform">
+                <div class="card-body">
+                    <h6>Detalle</h6>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="">Nombre</label>
+                            <input type="text" required  value="{{request.user.first_name}}" class="form-control" name="fname" placeholder="Ingrese su nombre">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Apellido</label>
+                            <input type="text" required value="{{request.user.last_name}}" class="form-control" name="lname" placeholder="Ingrese su apellido">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Rut</label>
+                            <input type="text" required value="{{userprofile.rut}}" class="form-control" name="rut" placeholder="Ingrese su rut">
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">Correo Electronico</label>
+                            <input type="email" required value="{{userprofile.email}}" class="form-control" name="email" placeholder="Ingrese su Correo electronico sin el +56">
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">Celular</label>
+                            <input type="text" required value="{{userprofile.phone}}" class="form-control" name="phone" placeholder="Ingrese su numero de celular">
+                        </div>
+                        
+                        <div class="col-md-6 mt-2">
+                            <label for="">Direccion</label>
+                            <textarea type="text" required  class="form-control" name="address" placeholder="Ingrese su Direccion">{{userprofile.address}}</textarea>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="">Ciudad</label>
+                            <input type="text" required value="{{userprofile.city}}" class="form-control" name="city" placeholder="Ingrese su ciudad">
+                        </div>
+                        <div class="col-md-6 mt-2" >
+                            <label for="">Region</label>
+                            <input type="text" required value="{{userprofile.region}}" class="form-control" name="region" placeholder="Ingrese su numero telefonico">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h6>Resumen del pedido</h6>
+                    <hr>
+                    {% if cartitems %}
+                        <table class="table table-stripeds table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cartitems %}
+                                <tr>
+
+                                    <td> <img src="{{ item.product.product_image.url }}" height="50px" width="50px" class="me-2" alt="imagen del producto"> {{ item.product.name }}</td>
+                                    <td>{{ item.product_qty }}</td>
+                                    <td>${{ item.product.final_price | stringformat:'d' }}</td>
+
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <h6 class="fw-bold">Total <span class="float-end"> ${{ total_price | stringformat:'d' }} </span></h6>
+                        <input type="hidden" value="COD" name="payment_mode">
+                        <div>
+                             <button type="submit" class="btn btn-success w-100 float-end ">Boton de prueba Realizar pedido</button>
+
+                        </div>
+                    {% else %}
+                        <h4>Tu carro esta vacio</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+
+{% endblock scripts %}

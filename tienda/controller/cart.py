@@ -4,7 +4,7 @@ from django.contrib import messages
 
 from tienda.models import Product, Cart
 
-
+from django.contrib.auth.decorators import login_required
 
 def addtocart(request):
     if request.method == 'POST':
@@ -28,6 +28,7 @@ def addtocart(request):
             return JsonResponse({'status':'Inicie sesion para continuar'})
         return redirect('/')
 
+@login_required(login_url='loginpage')
 def viewcart(request):
     cart= Cart.objects.filter(user=request.user)
     context = {'cart':cart}

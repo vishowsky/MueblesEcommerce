@@ -3,7 +3,7 @@
     
 {% block content %}
 
-<div class="py-3 bg-primary">
+<div class="py-3 bg-primary s">
    <div class="container">
        <a class="text-white" href="{% url 'home' %}">Inicio / </a>
        <a class="text-white" href="{% url 'cart' %}">Carro  </a>
@@ -45,9 +45,13 @@
                                     <div class="col-md-2 my-auto">
                                         <button class="btn btn-danger delete-cart-item">Quitar</button>
                                     </div>
+
+
+
                                 </div>
                                 
                             {% endfor %}
+                            <a href="{% url 'checkout' %} " class="btn btn-success my-3" >Ir a pagar</a>
                         {% else %}
                             <h4> El carro esta vacio</h4>
                         {% endif %}

@@ -92,8 +92,9 @@ $(document).ready(function (){
             csrfmiddlewaretoken: token
         },
         success: function(response){
+            location.reload();
             alertify.success(response.status)
-           location.reload();
+           
         }
     });
 
